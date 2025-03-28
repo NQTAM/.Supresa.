@@ -1,0 +1,289 @@
+<audio id="background-music" autoplay loop>
+
+  <source src="SUA-MUSICA-AQUI.mp3" type="audio/mp3">
+
+  Seu navegador não suporta o formato de áudio.
+
+</audio>
+
+<!-- Página Inicial -->
+
+<div id="page1" class="page active">
+
+  <h1>Coloque seu texto aqui</h1>
+
+  <button onclick="nextPage('page2')">Próximo</button>
+
+</div>
+
+<!-- Página 2 -->
+
+<div id="page2" class="page">
+
+  <h1>Coloque seu texto aqui</h1>
+
+  <button onclick="nextPage('page3')">Próximo</button>
+
+</div>
+
+<!-- Página Final -->
+
+<div id="page3" class="page">
+
+  <h1>Quer namorar comigo?</h1>
+
+  <button id="no-button" onclick="moveButton()">Não</button>
+
+  <button onclick="nextPage('page4')">Sim</button>
+
+</div>
+
+<!-- Página do Fim -->
+
+<div id="page4" class="page">
+
+  <h1>Coloque seu texto final aqui</h1>
+
+  <img src="SUA-IMAGEM-AQUI.jpg" alt="Imagem Final">
+
+</div>
+
+<!-- Adicionando corações animados ao fundo -->
+
+<div class="hearts-background">
+
+  <div class="heart" style="left: 10%;">❤️</div>
+
+  <div class="heart" style="left: 30%;">❤️</div>
+
+  <div class="heart" style="left: 50%;">❤️</div>
+
+  <div class="heart" style="left: 70%;">❤️</div>
+
+  <div class="heart" style="left: 90%;">❤️</div>
+
+</div>
+
+body {
+
+  font-family: Arial, sans-serif;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  height: 100vh;
+
+  margin: 0;
+
+  flex-direction: column;
+
+  background-color: #f0f0f0;
+
+  overflow: hidden;
+
+  position: relative;
+
+}
+
+.page {
+
+  display: none;
+
+  text-align: center;
+
+  opacity: 0;
+
+  transition: opacity 1s ease-in-out;
+
+}
+
+.page.active {
+
+  display: block;
+
+  opacity: 1;
+
+}
+
+h1 {
+
+  color: #333;
+
+}
+
+button {
+
+  background-color: #3498db;
+
+  color: white;
+
+  border: none;
+
+  padding: 10px 20px;
+
+  font-size: 16px;
+
+  cursor: pointer;
+
+  margin-top: 20px;
+
+  border-radius: 5px;
+
+}
+
+button:hover {
+
+  background-color: #2980b9;
+
+}
+
+#no-button {
+
+  position: relative;
+
+}
+
+#no-button.moving {
+
+  animation: moveButton 1s ease-in-out forwards;
+
+}
+
+@keyframes moveButton {
+
+  0% {
+
+    transform: translate(0, 0);
+
+  }
+
+  25% {
+
+    transform: translate(-100px, 0);
+
+  }
+
+  50% {
+
+    transform: translate(100px, 0);
+
+  }
+
+  75% {
+
+    transform: translate(0, 100px);
+
+  }
+
+  100% {
+
+    transform: translate(0, -100px);
+
+  }
+
+}
+
+.page img {
+
+  width: 80%;
+
+  max-width: 400px;
+
+  margin-top: 20px;
+
+}
+
+/* Efeito de corações flutuantes */
+
+.heart {
+
+  position: absolute;
+
+  bottom: -50px;
+
+  font-size: 30px;
+
+  color: red;
+
+  animation: floatHearts 5s infinite;
+
+}
+
+@keyframes floatHearts {
+
+  0% {
+
+    bottom: -50px;
+
+    opacity: 1;
+
+    transform: translateX(0) rotate(0deg);
+
+  }
+
+  50% {
+
+    bottom: 100vh;
+
+    opacity: 0.5;
+
+    transform: translateX(50px) rotate(45deg);
+
+  }
+
+  100% {
+
+    bottom: -50px;
+
+    opacity: 1;
+
+    transform: translateX(-50px) rotate(90deg);
+
+  }
+
+}
+
+/* Adicionando o fundo com corações */
+
+.hearts-background {
+
+  position: absolute;
+
+  top: 0;
+
+  left: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  pointer-events: none;
+
+  z-index: -1;
+
+}
+
+function nextPage(pageId) {
+
+  const currentPage = document.querySelector('.page.active');
+
+  currentPage.classList.remove('active');
+
+  
+
+  const nextPage = document.getElementById(pageId);
+
+  nextPage.classList.add('active');
+
+}
+
+function moveButton() {
+
+  const noButton = document.getElementById('no-button');
+
+  noButton.classList.add('moving');
+
+}
